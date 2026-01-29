@@ -5,8 +5,16 @@
 #ifndef MPU6050_MPU6050_H
 #define MPU6050_MPU6050_H
 #include "main.h"
+
+// 声明全局变量
+extern float pitch, roll, yaw;
+extern float gx, gy, gz;
+extern float ax, ay, az;
+
 void MPU6050_Init(void);
+void MPU6050_Proc(void);
 void MPU6050_Updata(void);
+void MPU6050_Proc1(void);
 
 float MPU6050_GetAx(void);
 float MPU6050_GetAy(void);

@@ -2,12 +2,16 @@
 // Created by 23286 on 2026/1/26.
 //
 #include "mpu6050.h"         // MPU6050驱动头文件，包含函数声明
+
+#include <math.h>
+
 #include "i2c.h"             // I2C通信头文件，包含HAL_I2C函数
 
 // 静态全局变量定义（仅在此文件内可见）
-static float ax, ay, az;     // 三轴加速度值（单位：g）
-static float gx, gy, gz;     // 三轴角速度值（单位：°/s）
+float ax, ay, az;     // 三轴加速度值（单位：g）
+float gx, gy, gz;     // 三轴角速度值（单位：°/s）
 static float temperature;    // 温度值（单位：℃）
+float yaw,pitch,roll; //欧拉角（单位：°）
 
 // 陀螺仪零偏校准变量（静态全局，用于存储校准偏移量）
 static float gyro_offset_x = 0, gyro_offset_y = 0, gyro_offset_z = 0;
@@ -170,4 +174,66 @@ float MPU6050_GetGy(void) {
 float MPU6050_GetGz(void) {
     return gz;
 }
+
+
+//陀螺仪解算漂移严重
+void MPU6050_Proc(void) {
+
+
+}
+
+//加速度计解算欧拉角
+void MPU6050_Proc1(void) {
+    MPU6050_Updata();
+    float yaw_g = yaw + gz * 0.005;
+    float pitch_g  = pitch + gx * 0.005;
+    float roll_g = roll - gy * 0.005;
+
+    float yaw_a = 0.0f;
+    float pitch_a = atan2(ay, az) / 3.1415926 *180.0f;
+    float roll_a = -atan2(ax, az) / 3.1415926 *180.0f;
+
+    yaw = (0.2*yaw_a + 0.8*yaw_g) - 0.02;
+    pitch = 0.2*pitch_a + 0.8*pitch_g;
+    roll = 0.2*roll_a + 0.8*roll_g;
+
+}
+/*
+ *
+//裸机多任务模型
+void MPU6056_Proc(void) {
+    MPU6050_Updata();
+    yaw = yaw + gz * 0.005;
+    pitch = pitch + gx * 0.005;
+    roll = roll - gy * 0.005;
+    HAL_Delay(5);不允许使用！
+}
+
+void MPU6056_Proc1(void) {
+    static float nxt = 0 ;
+    if (HAL_GetTick() < nxt) return;
+    yaw = yaw + gz * 0.005;
+    pitch = pitch + gx * 0.005;
+    roll = roll - gy * 0.005;
+    nxt += 5;
+}
+
+可以在.h文件中声明宏
+#define PERIODIC(T)\
+static float nxt = 0 ;\
+if (HAL_GetTick() < nxt) return;\
+nxt += 5;
+
+void MPU6056_Proc1(void) {
+    PERIODIC(5);
+    MPU6050_Updata();
+    yaw = yaw + gz * 0.005;
+    pitch = pitch + gx * 0.005;
+    roll = roll - gy * 0.005;
+}
+
+
+*/
+
+
 

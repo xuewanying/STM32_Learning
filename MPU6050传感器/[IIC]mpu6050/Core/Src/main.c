@@ -24,7 +24,9 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "mpu6050.h"
 #include "mpu6050_test.h"
+#include "mpu6050_EAtest.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -91,15 +93,18 @@ int main(void)
   MX_I2C1_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
-  mpu6050_test();
+  MPU6050_Init();
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+    MPU6050_Proc1();
+    VOFA_Send_3Angles();
     /* USER CODE END WHILE */
-  mpu6050_test();
+
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
