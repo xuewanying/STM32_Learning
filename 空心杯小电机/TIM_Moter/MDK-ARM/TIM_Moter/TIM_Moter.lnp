@@ -1,0 +1,23 @@
+--cpu Cortex-M3
+"tim_moter\startup_stm32f103xb.o"
+"tim_moter\main.o"
+"tim_moter\stm32f1xx_it.o"
+"tim_moter\stm32f1xx_hal_msp.o"
+"tim_moter\stm32f1xx_hal_gpio_ex.o"
+"tim_moter\stm32f1xx_hal_tim.o"
+"tim_moter\stm32f1xx_hal_tim_ex.o"
+"tim_moter\stm32f1xx_hal.o"
+"tim_moter\stm32f1xx_hal_rcc.o"
+"tim_moter\stm32f1xx_hal_rcc_ex.o"
+"tim_moter\stm32f1xx_hal_gpio.o"
+"tim_moter\stm32f1xx_hal_dma.o"
+"tim_moter\stm32f1xx_hal_cortex.o"
+"tim_moter\stm32f1xx_hal_pwr.o"
+"tim_moter\stm32f1xx_hal_flash.o"
+"tim_moter\stm32f1xx_hal_flash_ex.o"
+"tim_moter\stm32f1xx_hal_exti.o"
+"tim_moter\system_stm32f1xx.o"
+--strict --scatter "TIM_Moter\TIM_Moter.sct"
+--summary_stderr --info summarysizes --map --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "TIM_Moter.map" -o TIM_Moter\TIM_Moter.axf
