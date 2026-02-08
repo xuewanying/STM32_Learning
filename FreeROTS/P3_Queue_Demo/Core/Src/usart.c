@@ -143,7 +143,7 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* uartHandle)
 /* USER CODE BEGIN 1 */
 uint8_t rxdata;
 
-void UART1_Recieve_Start() {
+void UART1_Receive_Start() {
   HAL_UART_Receive_IT(&huart1, (uint8_t*)&rxdata, 1);
 }
 
