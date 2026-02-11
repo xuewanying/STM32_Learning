@@ -1,0 +1,28 @@
+--cpu Cortex-M3
+"c_flymini1\startup_stm32f103xb.o"
+"c_flymini1\main.o"
+"c_flymini1\gpio.o"
+"c_flymini1\i2c.o"
+"c_flymini1\tim.o"
+"c_flymini1\stm32f1xx_it.o"
+"c_flymini1\stm32f1xx_hal_msp.o"
+"c_flymini1\mpu6050.o"
+"c_flymini1\stm32f1xx_hal_gpio_ex.o"
+"c_flymini1\stm32f1xx_hal_i2c.o"
+"c_flymini1\stm32f1xx_hal.o"
+"c_flymini1\stm32f1xx_hal_rcc.o"
+"c_flymini1\stm32f1xx_hal_rcc_ex.o"
+"c_flymini1\stm32f1xx_hal_gpio.o"
+"c_flymini1\stm32f1xx_hal_dma.o"
+"c_flymini1\stm32f1xx_hal_cortex.o"
+"c_flymini1\stm32f1xx_hal_pwr.o"
+"c_flymini1\stm32f1xx_hal_flash.o"
+"c_flymini1\stm32f1xx_hal_flash_ex.o"
+"c_flymini1\stm32f1xx_hal_exti.o"
+"c_flymini1\stm32f1xx_hal_tim.o"
+"c_flymini1\stm32f1xx_hal_tim_ex.o"
+"c_flymini1\system_stm32f1xx.o"
+--strict --scatter "C_Flymini1\C_Flymini1.sct"
+--summary_stderr --info summarysizes --map --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "C_Flymini1.map" -o C_Flymini1\C_Flymini1.axf
